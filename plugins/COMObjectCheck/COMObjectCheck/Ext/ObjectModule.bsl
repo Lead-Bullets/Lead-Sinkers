@@ -1,6 +1,8 @@
 ﻿
+Var Nodes;
+
 Procedure Init(BSLParser) Export
-	
+	Nodes = BSLParser.Nodes();
 EndProcedure // Init() 
 
 Function Interface() Export
@@ -10,15 +12,12 @@ Function Interface() Export
 	Return Interface;
 EndFunction // Interface() 
 
-Procedure VisitDecl(Module, Decl) Export
+Procedure VisitDecl(Decl, Info) Export
 	Var InTry, Stmt;
 	InTry = False;
-	Stmt = VisitStatements(Decl.Body, InTry);
-	//If Stmt = Undefined
-	//	Or Stmt.Type <> "ReturnStmt"
-	//	Or TryCount <> 1 Then
-	//	
-	//EndIf;
+	If Decl.Type = Nodes.FuncDecl Or Decl.Type = Nodes.ProcDecl Then
+		Stmt = VisitStatements(Decl.Body, InTry);
+	EndIf; 
 EndProcedure // VisitFuncDecl()
 
 Function VisitStatements(Statements, InTry)
