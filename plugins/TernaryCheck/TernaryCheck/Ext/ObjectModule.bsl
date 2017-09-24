@@ -11,7 +11,7 @@ Function Interface() Export
 EndFunction // Interface() 
 
 Procedure VisitTernaryExpr(Decl, Info) Export
-	If Info.Outer.Parent.Type = "TernaryExpr" Then 
-		Message(StrTemplate("Строка %1. Использование вложенного тернарного оператора", Decl.Place.Line));
+	If Info.Outer.Parent.Type = "TernaryExpr" Or Info.Parent.Type = "TernaryExpr" Then 
+		Message(StrTemplate("Строка %1 Позиция %2. Использование вложенного тернарного оператора", Decl.Place.Line, Decl.Place.Pos));
 	EndIf;
 EndProcedure // VisitTernaryExpr()
