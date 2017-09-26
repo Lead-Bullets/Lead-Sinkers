@@ -10,8 +10,8 @@ Function Interface() Export
 	Return Interface;
 EndFunction // Interface() 
 
-Procedure VisitStringExpr(Decl) Export
-	For Each Expr In Decl.List Do 
+Procedure VisitStringExpr(StringExpr) Export
+	For Each Expr In StringExpr.List Do 
 		If Find(Expr.Value, "http") Then 
 			Message(StrTemplate("В коде не должно быть ссылок, строка - %1" "", Expr.Place.Line));
 		EndIf;
